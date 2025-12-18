@@ -1,4 +1,4 @@
-import raposa from './Heading.module.css'
+import raposa from './styles.module.css'
 
 type HeadingProps = {
     children: React.ReactNode;
