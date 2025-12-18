@@ -1,12 +1,16 @@
 import './styles/theme.css';
 import './styles/global.css';
 import { Heading } from './components/Heading';
+import { TimerIcon } from 'lucide-react';
 
 export function App() {
 
     return (
         <>
-            <Heading>Blog do Leonardo</Heading>
+            <Heading>
+                Blog do Leonardo
+                <button><TimerIcon /></button>
+            </Heading>
             <p>
                 Olá, meu nome é Leonardo Paulino, seja muito bem-vindo
                 ao
