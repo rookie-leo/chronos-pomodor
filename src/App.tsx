@@ -1,12 +1,13 @@
 import './styles/theme.css';
 import './styles/global.css';
+import { Heading } from './components/Heading';
 
 export function App() {
     console.log('Teste: testando...')
 
     return (
         <>
-            <h1>Leonardo Blog</h1>
+            <Heading />
             <p>
                 Olá, meu nome é Leonardo Paulino, seja muito bem-vindo
                 ao
