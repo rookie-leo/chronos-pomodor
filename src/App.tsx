@@ -7,7 +7,7 @@ export function App() {
 
     return (
         <>
-            <Heading />
+            <Heading>Blog do Leonardo</Heading>
             <p>
                 Olá, meu nome é Leonardo Paulino, seja muito bem-vindo
                 ao

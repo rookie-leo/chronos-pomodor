@@ -1,5 +1,5 @@
 import raposa from './Heading.module.css'
 
-export function Heading() {
-    return <h1 className={raposa.heading}>Leonardo Blog</h1>
+export function Heading(props) {
+    return <h1 className={raposa.heading}>{props.children}</h1>
 }
