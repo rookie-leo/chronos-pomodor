@@ -12,11 +12,19 @@
     gap: 0.8rem;
 }
 
-.cycleDot{
+.cycleDot {
     width: 2rem;
     height: 2rem;
     background-color: var(--primary);
     border-radius: 50%;
+}
+
+.cycleLabel {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+
+    margin-bottom: 0.8rem;
 }
 
 .workTime {
