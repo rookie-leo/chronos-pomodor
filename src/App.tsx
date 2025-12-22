@@ -10,9 +10,27 @@ import { Cycles } from './components/Cycles';
 import { DefaultButton } from './components/DefaultButton';
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 import { Footer } from './components/Footer';
+import { Heading } from './components/Heading';
+
 export function App() {
+     let numero: number = 0;
+
+    function handleClick() {
+        const span = document.getElementById('numero');
+
+        if(!span) return;
+
+        numero++;
+        span.innerText = numero.toString();
+        console.log("Numero: " + (numero));
+    }
 
     return <>
+        <Heading>
+            Numero <span id='numero'>{numero}</span>
+            <button onClick={handleClick}>Button</button>
+        </Heading>
+
         <Container>
             <Logo />
         </Container>
@@ -37,7 +55,7 @@ export function App() {
                 </div>
 
                 <div className='formRow'>
-                    <p>Lorem ipsum dolor sit amet.</p>
+                    <p>{numero}</p>
                 </div>
 
                 <div className='formRow'>
