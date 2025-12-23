@@ -8,8 +8,15 @@ export function Menu() {
     const [theme, setTheme] = useState<AvailableThemes>('dark')
 
     function toggleTheme(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
-        event.preventDefault(); //Não muda de pagina ao clicar no link
+        event.preventDefault() //Não muda de pagina ao clicar no link
         console.log("Troca trocando...")
+
+        setTheme(prevTheme => {
+            const nextTheme = prevTheme === 'dark' ? 'light' : 'dark'
+            return nextTheme
+        })
+
+        document.documentElement.setAttribute('data-theme', theme)
     }
 
     return (
