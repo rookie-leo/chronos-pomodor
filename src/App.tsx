@@ -11,23 +11,18 @@ import { DefaultButton } from './components/DefaultButton';
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 import { Footer } from './components/Footer';
 import { Heading } from './components/Heading';
+import { useState } from 'react';
 
 export function App() {
-     let numero: number = 0;
+     const [numero, setNumero] = useState(0);
 
     function handleClick() {
-        const span = document.getElementById('numero');
-
-        if(!span) return;
-
-        numero++;
-        span.innerText = numero.toString();
-        console.log("Numero: " + (numero));
+        setNumero(prevState => prevState + 1)
     }
 
     return <>
         <Heading>
-            Numero <span id='numero'>{numero}</span>
+            Numero de cliques: {numero}
             <button onClick={handleClick}>Button</button>
         </Heading>
 
