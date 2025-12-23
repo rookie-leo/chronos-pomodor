@@ -1,23 +1,55 @@
 import { HistoryIcon, HouseIcon, SettingsIcon, SunIcon } from 'lucide-react'
 import styles from './styles.module.css'
+import { useState } from 'react'
 
+type AvailableThemes = 'dark' | 'light';
 
 export function Menu() {
-    return <div className={styles.menu}>
-        <a className={styles.menuLink} href='#'>
-            <HouseIcon />
-        </a>
+    const [theme, setTheme] = useState<AvailableThemes>('dark')
 
-        <a className={styles.menuLink} href='#'>
-            <HistoryIcon />
-        </a>
+    function toggleTheme(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+        event.preventDefault(); //Não muda de pagina ao clicar no link
+        console.log("Troca trocando...")
+    }
 
-        <a className={styles.menuLink} href='#'>
-            <SettingsIcon />
-        </a>
+    return (
+        <div className={styles.menu}>
+            <a 
+                className={styles.menuLink} 
+                href='#'
+                aria-label='Home'
+                title='Ir para home'
+            >
+                <HouseIcon />
+            </a>
 
-        <a className={styles.menuLink} href='#'>
-            <SunIcon />
-        </a>
-    </div>
+            <a 
+                className={styles.menuLink} 
+                href='#'
+                aria-label='Histórico'
+                title='Ver historico'
+            >
+                <HistoryIcon />
+            </a>
+
+            <a 
+                className={styles.menuLink} 
+                href='#'
+                aria-label='Configurações'
+                title='Ir para configurações'
+            >
+                <SettingsIcon />
+            </a>
+
+            <a 
+                className={styles.menuLink} 
+                href='#'
+                aria-label='Tema'
+                title='Mudar tema claro/escuro'
+                onClick={toggleTheme}
+            >
+                <SunIcon />
+            </a>
+        </div>
+    )
 }

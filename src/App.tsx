@@ -10,22 +10,9 @@ import { Cycles } from './components/Cycles';
 import { DefaultButton } from './components/DefaultButton';
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 import { Footer } from './components/Footer';
-import { Heading } from './components/Heading';
-import { useState } from 'react';
 
 export function App() {
-     const [numero, setNumero] = useState(0);
-
-    function handleClick() {
-        setNumero(prevState => prevState + 1)
-    }
-
     return <>
-        <Heading>
-            Numero de cliques: {numero}
-            <button onClick={handleClick}>Button</button>
-        </Heading>
-
         <Container>
             <Logo />
         </Container>
@@ -50,7 +37,7 @@ export function App() {
                 </div>
 
                 <div className='formRow'>
-                    <p>{numero}</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, deleniti!</p>
                 </div>
 
                 <div className='formRow'>
