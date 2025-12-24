@@ -23,9 +23,6 @@ const initialState: TaskStateModel = {
 export function App() {
     const [state, setState] = useState(initialState)
 
-    console.log('Testando Teste',state);
-
-
     return <Home state={state} setState={setState}/>;
     // return <NotFound />;
     // return <AboutPomodoro />;
