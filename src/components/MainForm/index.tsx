@@ -3,15 +3,50 @@ import { Cycles } from "../Cycles";
 import { DefaultButton } from "../DefaultButton";
 import { DefaultInput } from "../DefaultInput";
 import { useRef } from "react";
+import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
+import type { TaskModel } from "../../models/TaskModel";
 
 export function MainForm() {
+    const { setState } = useTaskContext()
     const taskNameInput = useRef<HTMLInputElement>(null)
 
     function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        console.log("Teste testando....")
-    }
 
+        if (!taskNameInput.current) return
+
+        const taskName = taskNameInput.current.value.trim()
+
+        if (!taskName) {
+            alert('Insira o nome da tarefa')
+            return
+        }
+
+        const newTask: TaskModel = {
+            id: Date.now().toString(),
+            name: taskName,
+            startDate: Date.now(),
+            completeDate: null,
+            interruptDate: null,
+            duration: 1,
+            type: 'workTime'
+        }
+
+        const secondsRemainig = newTask.duration * 60
+
+        setState(prevState => {
+            return {
+                ...prevState,
+                config: { ...prevState.config },
+                activeTask: newTask,
+                currentCycle: 1,  //TODO - automatizar
+                secondsRemaining: secondsRemainig,  //TODO - automatizar
+                formattedSecondsRemaining: '00:00', //TODO - automatizar
+                tasks: [...prevState.tasks, newTask]
+            }
+
+        })
+    }
 
     return (
         <form className="form" action="" onSubmit={handleCreateNewTask}>
