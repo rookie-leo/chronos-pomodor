@@ -4,9 +4,14 @@ import { DefaultButton } from "../DefaultButton";
 import { DefaultInput } from "../DefaultInput";
 
 export function MainForm() {
+    function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        console.log("Teste testando....")
+    }
+
 
     return (
-        <form className="form" action="">
+        <form className="form" action="" onSubmit={handleCreateNewTask}>
             <div className='formRow'>
                 <DefaultInput
                     labelText='atividade'
