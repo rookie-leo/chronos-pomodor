@@ -6,11 +6,13 @@ import { useRef } from "react";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import type { TaskModel } from "../../models/TaskModel";
 import { getNextCycle } from "../../utils/getNextCycle";
+import { getNextCycleType } from "../../utils/getNextCycleType";
 
 export function MainForm() {
     const { state, setState } = useTaskContext()
     const taskNameInput = useRef<HTMLInputElement>(null)
     const nextCycle = getNextCycle(state.currentCycle)
+    const nextCycleType = getNextCycleType(nextCycle)
 
     console.log("NextCycle: ",nextCycle)
 
@@ -33,7 +35,7 @@ export function MainForm() {
             completeDate: null,
             interruptDate: null,
             duration: 1,
-            type: 'workTime'
+            type: nextCycleType
         }
 
         const secondsRemainig = newTask.duration * 60
