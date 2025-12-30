@@ -64,6 +64,7 @@ export function MainForm() {
                     type='text'
                     placeholder='Nome da tarefa'
                     ref={taskNameInput}
+                    disabled={!!state.activeTask}
                 />
             </div>
 
@@ -78,8 +79,20 @@ export function MainForm() {
             }
 
             <div className='formRow'>
-                <DefaultButton icon={<PlayCircleIcon />} />
-                <DefaultButton icon={<StopCircleIcon />} color='red' />
+                {!state.activeTask ? (
+                    <DefaultButton
+                        aria-label="Iniciar nova tarefa"
+                        title="Iniciar nova tarefa"
+                        type="submit"
+                        icon={<PlayCircleIcon />} />
+                ) : (
+                    <DefaultButton
+                        aria-label="Interromper tarefa atual"
+                        title="Interromper tarefa atual"
+                        type="button"
+                        icon={<StopCircleIcon />} 
+                        color="red"/>
+                )}
             </div>
         </form>
     )
