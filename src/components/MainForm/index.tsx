@@ -15,8 +15,6 @@ export function MainForm() {
     const nextCycle = getNextCycle(state.currentCycle)
     const nextCycleType = getNextCycleType(nextCycle)
 
-    console.log("NextCycle: ", nextCycle)
-
     function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
@@ -55,6 +53,17 @@ export function MainForm() {
         })
     }
 
+    function handleInterruptTask() {
+        setState(prevState => {
+            return {
+                ...prevState,
+                activeTask: null,
+                secondsRemaining: 0,
+                formattedSecondsRemaining: '00:00'
+            }
+        })
+    }
+
     return (
         <form className="form" action="" onSubmit={handleCreateNewTask}>
             <div className='formRow'>
@@ -79,19 +88,26 @@ export function MainForm() {
             }
 
             <div className='formRow'>
-                {!state.activeTask ? (
+                {!state.activeTask && (
                     <DefaultButton
                         aria-label="Iniciar nova tarefa"
                         title="Iniciar nova tarefa"
                         type="submit"
-                        icon={<PlayCircleIcon />} />
-                ) : (
+                        icon={<PlayCircleIcon />}
+                        key='form_button'
+                    />
+                )}
+
+                {!!state.activeTask && (
                     <DefaultButton
                         aria-label="Interromper tarefa atual"
                         title="Interromper tarefa atual"
                         type="button"
-                        icon={<StopCircleIcon />} 
-                        color="red"/>
+                        icon={<StopCircleIcon />}
+                        color="red"
+                        onClick={handleInterruptTask}
+                        key='interrupt_button'
+                    />
                 )}
             </div>
         </form>
