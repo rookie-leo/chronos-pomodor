@@ -15,7 +15,7 @@ export function MainForm() {
     const nextCycle = getNextCycle(state.currentCycle)
     const nextCycleType = getNextCycleType(nextCycle)
 
-    console.log("NextCycle: ",nextCycle)
+    console.log("NextCycle: ", nextCycle)
 
     function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -48,7 +48,7 @@ export function MainForm() {
                 activeTask: newTask,
                 currentCycle: nextCycle,
                 secondsRemaining: secondsRemainig,  //TODO - automatizar
-                formattedSecondsRemaining: formatSecondsToMinutes(secondsRemainig), 
+                formattedSecondsRemaining: formatSecondsToMinutes(secondsRemainig),
                 tasks: [...prevState.tasks, newTask]
             }
 
@@ -71,9 +71,11 @@ export function MainForm() {
                 <p>Próximo intervalo: 15min</p>
             </div>
 
-            <div className='formRow'>
-                <Cycles />
-            </div>
+            {state.currentCycle > 0 && (
+                <div className='formRow'>
+                    <Cycles />
+                </div>)
+            }
 
             <div className='formRow'>
                 <DefaultButton icon={<PlayCircleIcon />} />
