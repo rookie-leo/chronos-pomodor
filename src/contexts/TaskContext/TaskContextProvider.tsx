@@ -1,4 +1,4 @@
-import {  useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { initialTaskState } from "./initialTaskState";
 import { TaskContext } from "./TaskContext";
 import { taskReducer } from "./taskReducer";
@@ -17,14 +17,16 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
         const countDownSeconds = e.data
         console.log(countDownSeconds)
 
-        dispatch({
-            type: TaskActionsTypes.COUNT_DOWN,
-            payload: { secondsRemaining: countDownSeconds }
-        })
-
         if (countDownSeconds < 1) {
-            console.log("Worker COMPLETED")
+            dispatch({
+                type: TaskActionsTypes.COMPLETE_TASK
+            })
             worker.terminate()
+        } else {
+            dispatch({
+                type: TaskActionsTypes.COUNT_DOWN,
+                payload: { secondsRemaining: countDownSeconds }
+            })
         }
     })
 
