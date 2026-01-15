@@ -9,11 +9,13 @@ import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { formatDate } from '../../utils/formatDate';
 import { getTaskStatus } from '../../utils/getTaskStatus';
 import { sortTasks, type SortTaskOptions } from '../../utils/sortTasks';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { showMessage } from '../../adapters/showMessage';
 import { TaskActionsTypes } from '../../contexts/TaskContext/taskActions';
 
 export function History() {
     const { state, dispatch } = useTaskContext()
+    const [confirmClearHistory, setConfirmClearHistory] = useState(false)
     const hasTasks = state.tasks.length > 0
 
     const [sortConfig, setSortConfig] = useState<{
@@ -32,6 +34,21 @@ export function History() {
         })
     }, [state.tasks, sortConfig])
 
+    useEffect(() => {
+        if (!confirmClearHistory) return
+
+        console.log("APAGANDO HISTORICO")
+        setConfirmClearHistory(false)
+
+        dispatch({ type: TaskActionsTypes.RESET_STATE })
+    }, [confirmClearHistory, dispatch])
+
+    useEffect(() => {
+        return () => {
+            showMessage.dismiss()
+        }
+    }, [])
+
     function handleSortTasks({ field }: Pick<SortTaskOptions, 'field'>) {
         setSortConfig(prev => ({
             field,
@@ -40,9 +57,9 @@ export function History() {
     }
 
     function handleResetHistory() {
-        if (!confirm('Tem certeza que deseja limpar o histórico?')) return
-
-        dispatch({ type: TaskActionsTypes.RESET_STATE })
+        showMessage.confirm('Tem certeza que deseja limpar o histórico?', confirmation => {
+            setConfirmClearHistory(confirmation)
+        })
     }
 
     return (
