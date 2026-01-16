@@ -7,9 +7,10 @@ import { SaveIcon } from 'lucide-react';
 import { useRef } from 'react';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { showMessage } from '../../adapters/showMessage';
+import { TaskActionsTypes } from '../../contexts/TaskContext/taskActions';
 
 export function Settings() {
-    const { state } = useTaskContext()
+    const { state, dispatch } = useTaskContext()
     const workTimeInputRef = useRef<HTMLFormElement>(null)
     const shortBreakTimeInputRef = useRef<HTMLFormElement>(null)
     const longBreakTimeInputRef = useRef<HTMLFormElement>(null)
@@ -47,7 +48,16 @@ export function Settings() {
             return
         }
 
-        console.log("Salvando...")
+        dispatch({
+            type: TaskActionsTypes.CHANGE_SETTINGS,
+            payload: {
+                workTime,
+                shortBreakTime,
+                longBreakTime
+            }
+        })
+
+        showMessage.success('Configurações Salvas!')
     }
 
 
