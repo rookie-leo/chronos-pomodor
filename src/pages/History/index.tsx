@@ -35,6 +35,10 @@ export function History() {
     }, [state.tasks, sortConfig])
 
     useEffect(() => {
+        document.title = 'Histórico - Chronos Pomodoro'
+    }, [])
+
+    useEffect(() => {
         if (!confirmClearHistory) return
 
         console.log("APAGANDO HISTORICO")
