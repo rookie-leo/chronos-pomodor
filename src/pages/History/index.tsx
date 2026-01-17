@@ -15,7 +15,7 @@ import { TaskActionsTypes } from '../../contexts/TaskContext/taskActions';
 
 export function History() {
     const { state, dispatch } = useTaskContext()
-    const [confirmClearHistory, setConfirmClearHistory] = useState(false)
+    // const [confirmClearHistor_, setConfirmClearHistory] = useState(false)
     const hasTasks = state.tasks.length > 0
 
     const [sortConfig, setSortConfig] = useState<{
@@ -39,15 +39,6 @@ export function History() {
     }, [])
 
     useEffect(() => {
-        if (!confirmClearHistory) return
-
-        console.log("APAGANDO HISTORICO")
-        setConfirmClearHistory(false)
-
-        dispatch({ type: TaskActionsTypes.RESET_STATE })
-    }, [confirmClearHistory, dispatch])
-
-    useEffect(() => {
         return () => {
             showMessage.dismiss()
         }
@@ -62,7 +53,8 @@ export function History() {
 
     function handleResetHistory() {
         showMessage.confirm('Tem certeza que deseja limpar o histórico?', confirmation => {
-            setConfirmClearHistory(confirmation)
+            if (!confirmation) return
+            dispatch({ type: TaskActionsTypes.RESET_STATE })
         })
     }
 
